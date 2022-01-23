@@ -14,7 +14,7 @@ let apolloClient;
 
 if (process.env.NODE_ENV === 'production') {
   apolloClient = new ApolloClient({
-    uri: `${process.env.VUE_APP_DATABASE_URL}/graphql`
+    uri: `${process.env.VUE_APP_DEPLOYED_APP_ADDRESS}/graphql`
   });
 } else {
   apolloClient = new ApolloClient({
