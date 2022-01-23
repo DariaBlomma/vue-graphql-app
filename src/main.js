@@ -10,9 +10,17 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false
 
-const apolloClient = new ApolloClient({
-  uri: 'http://localhost:3000/graphql'
-});
+let apolloClient;
+if (process.env.NODE_ENV === 'production') {
+  apolloClient = new ApolloClient({
+    uri: `${process.env.VUE_APP_DATABASE_URI}:5432/graphql`
+  });
+} else {
+  apolloClient = new ApolloClient({
+    uri: 'http://localhost:3000/graphql'
+  });
+}
+
 
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient
