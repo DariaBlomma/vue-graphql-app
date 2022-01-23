@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 let apolloClient;
 if (process.env.NODE_ENV === 'production') {
   apolloClient = new ApolloClient({
-    uri: `${process.env.VUE_APP_DATABASE_URI}:5432/graphql`
+    uri: `${process.env.VUE_APP_DATABASE_URI}/graphql`
   });
 } else {
   apolloClient = new ApolloClient({
