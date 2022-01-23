@@ -11,9 +11,10 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.config.productionTip = false
 
 let apolloClient;
+
 if (process.env.NODE_ENV === 'production') {
   apolloClient = new ApolloClient({
-    uri: `${process.env.VUE_APP_DATABASE_URI}/graphql`
+    uri: `${process.env.DATABASE_URL}/graphql`
   });
 } else {
   apolloClient = new ApolloClient({
