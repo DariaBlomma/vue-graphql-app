@@ -4,16 +4,24 @@ on:
     branches:
       - master
 jobs:
-  check-bats-version:
+  build-and-cache:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - run: npm install -g bats
-      - run: bats -v
+      - name: Build production dist
       - run: cd ..
       - run: npm install
       - run: npm run build
-      - run: echo "a new test line" > ../../vue-graphql/test.txt
+      - name: Cache
+        id: client-build-cache
+        uses: actions/cache@v2
+        with:
+          path: ./dist/
+          key: ${{ runner.os }}-${{ hashFiles('**/dist') }}
+      - name: Restore cache
+        if: steps.client-build-cache.outputs.cache-hit == 'true'
+        run: echo 'has cache'
+    
